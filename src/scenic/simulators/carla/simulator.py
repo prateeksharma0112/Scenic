@@ -60,6 +60,7 @@ class CarlaSimulator(DrivingSimulator):
             traffic_manager_port = port + 6000
         self.tm = self.client.get_trafficmanager(traffic_manager_port)
         self.tm.set_synchronous_mode(True)
+        
 
         # Set to synchronous with fixed timestep
         settings = self.world.get_settings()
@@ -111,6 +112,7 @@ class CarlaSimulation(DrivingSimulation):
         self.record = record
         self.scenario_number = scenario_number
         self.cameraManager = None
+        self.clock = pygame.time.Clock()
 
         super().__init__(scene, **kwargs)
 
@@ -262,6 +264,7 @@ class CarlaSimulation(DrivingSimulation):
 
     def step(self):
         # Run simulation for one timestep
+        self.clock.tick_busy_loop(30)
         self.world.tick()
 
         # Render simulation
