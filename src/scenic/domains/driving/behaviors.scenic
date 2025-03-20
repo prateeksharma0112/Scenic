@@ -145,7 +145,7 @@ behavior FollowLaneBehavior(target_speed = 10, laneToFollow=None, is_oppositeTra
         # compute steering : Lateral Control
         current_steer_angle = _lat_controller.run_step(cte)
 
-        take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
+        take RegulatedControlAction(throttle=throttle, steer=current_steer_angle, past_steer=past_steer_angle, max_throttle=0.9, max_brake=1.0, max_steer=0.8)
         past_steer_angle = current_steer_angle
         past_speed = current_speed
 
@@ -201,7 +201,7 @@ behavior FollowTrajectoryBehavior(target_speed = 10, trajectory = None, turn_spe
         # compute steering : Latitudinal Control
         current_steer_angle = _lat_controller.run_step(cte)
 
-        take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
+        take RegulatedControlAction(throttle=throttle, steer=current_steer_angle, past_steer=past_steer_angle, max_throttle=0.9, max_brake=1.0, max_steer=0.8)
         past_steer_angle = current_steer_angle
 
 
@@ -238,7 +238,7 @@ behavior TurnBehavior(trajectory, target_speed=6):
         # compute steering : Latitudinal Control
         current_steer_angle = _lat_controller.run_step(cte)
 
-        take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
+        take RegulatedControlAction(throttle=throttle, steer=current_steer_angle, past_steer=past_steer_angle, max_throttle=0.9, max_brake=1.0, max_steer=0.8)
         past_steer_angle = current_steer_angle
 
 
@@ -315,5 +315,5 @@ behavior LaneChangeBehavior(laneSectionToSwitch, is_oppositeTraffic=False, targe
         # compute steering : Latitudinal Control
         current_steer_angle = _lat_controller.run_step(cte)
 
-        take RegulatedControlAction(throttle, current_steer_angle, past_steer_angle)
+        take RegulatedControlAction(throttle=throttle, steer=current_steer_angle, past_steer=past_steer_angle, max_throttle=0.9, max_brake=1.0, max_steer=0.8)
         past_steer_angle = current_steer_angle
