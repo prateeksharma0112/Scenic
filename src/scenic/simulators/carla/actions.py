@@ -164,6 +164,21 @@ class SetVehicleLightStateAction(VehicleAction):
     def applyTo(self, obj, sim):
         obj.carlaActor.set_light_state(self.vehicleLightState)
 
+class SetAutoPilotLane(VehicleAction):
+    """
+    Change lane for autopilot
+    """
+    def __init__(self, offset = 2.5):
+        """
+        :param lane - True for right and False for left
+        """
+        self.offset = offset
+    
+    def applyTo(self, obj, sim):
+        vehicle = obj.carlaActor
+        sim.tm.update_vehicle_lights(vehicle, False)
+        sim.tm.vehicle_lane_offset(vehicle, self.offset)
+
 
 #################################################
 # Actions available to all carla.Walker objects #
